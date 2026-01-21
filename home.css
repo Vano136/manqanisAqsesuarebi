@@ -1,0 +1,600 @@
+:root {
+  --bg-color: #f4f4f4;
+  --text-color: #333;
+  --nav-bg: #222;
+  --nav-text: #fff;
+  --accent-color: #ff6600;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --nav-bg: #000;
+  --nav-text: #ddd;
+  --shadow: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 6px var(--shadow);
+  z-index: 1000;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--nav-text);
+  border-bottom: 3px solid var(--accent-color);
+  padding-bottom: 5px;
+  z-index: 2;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  margin-right: 15px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.6));
+  display: block;
+}
+
+.theme-switch-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 26px;
+  position: relative;
+  width: 50px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+  border: 2px solid #555;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 3px;
+  content: "";
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 16px;
+}
+
+input:checked + .slider {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+  background-color: #222;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.navbar-links ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  list-style: none;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: var(--nav-text);
+  padding: 1rem;
+  display: block;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: var(--accent-color);
+}
+
+.toggle-button {
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  z-index: 3;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--nav-text);
+  border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .theme-switch-wrapper {
+    position: absolute;
+    top: 1.2rem;
+    left: auto;
+    right: 4rem;
+    transform: none;
+  }
+
+  .toggle-button {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar-links ul li {
+    text-align: center;
+    border-bottom: 1px solid #444;
+  }
+
+  .navbar-links ul li a {
+    padding: 1rem;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+}
+.footer-section {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 3rem 1rem 1rem 1rem;
+  margin-top: auto; /* Pushes footer to bottom if page is short */
+  border-top: 4px solid var(--accent-color);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-col {
+  flex: 1 1 200px; /* Grow, shrink, base width */
+  min-width: 220px;
+}
+
+.footer-brand {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  margin-left: 0;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #bbb; /* Slightly lighter for text */
+  max-width: 300px;
+}
+
+/* Adjust text color for light mode specifically if needed */
+[data-theme="light"] .footer-text {
+  color: #555;
+}
+
+.footer-col h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-col ul li a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--accent-color);
+  padding-left: 5px;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.social-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 10px;
+}
+
+.social-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.social-btn:hover {
+  background-color: var(--accent-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #444;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+[data-theme="light"] .footer-bottom {
+  border-top: 1px solid #ddd;
+}
+
+/* --- NEW / MODIFIED MAIN CONTENT LAYOUT --- */
+
+.main-content {
+  display: flex; /* Enable Flexbox layout */
+  max-width: 1200px; /* Limit the max width of the content area */
+  margin: 50px auto 50px auto; /* Center the content area */
+  padding: 0 1rem; /* Add some padding on the sides */
+  gap: 2rem; /* Space between the items */
+  align-items: center; /* Vertically align items in the middle */
+}
+
+.home-image {
+  width: 100%; /* Take up half the container width */
+  height: auto;
+  display: block;
+  margin-left: 0; 
+  border-radius: 8px;
+  flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.about {
+  /* Removed old display: block and margin rules */
+  display: flex; 
+  flex-direction: column; /* Keep text flow */
+  justify-content: center; /* Center content vertically if space allows */
+  width: 50%; /* Take up the other half of the container width */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: left; /* Changed from center to left for better flow next to image */
+  color: var(--text-color);
+  padding: 0; /* Removed explicit padding from old rule */
+  margin-right: 50px;
+}
+.more {
+  text-align: center;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: 175px;
+  height: 40px;
+}
+.more:hover {
+  text-align: center;
+  background-color: #FF6600AA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  width: 175px;
+  height: 40px;
+}
+.about-link {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  text-decoration: none;
+}
+@media (max-width: 800px) {
+  .main-content {
+    flex-direction: column; /* Stack items vertically */
+    gap: 1.5rem;
+    margin: 1.5rem auto;
+  }
+
+  .about {
+    width: 90%; /* Make them take up most of the width */
+    max-width: 500px; /* Optional: limit max size even when full width */
+    margin: 0 auto;
+  }
+
+  .about {
+    text-align: center; /* Center the text again when stacked */
+  }
+
+  .home-image{
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* --- FOOTER MEDIA QUERY (Kept the original, but check for conflicts) --- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-col {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    margin: 0 auto 1rem auto;
+  }
+
+  .footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .home-image{
+    width: 100%;
+    height: auto;
+  }
+}
+.page-layout {
+    display: flex; /* Enable Flexbox for sidebar and content */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+.sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    flex-shrink: 0; /* Prevents sidebar from shrinking */
+    background-color: var(--nav-bg); /* Use navbar background for contrast */
+    color: var(--nav-text);
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow);
+    height: fit-content; /* Ensure it only takes the required height */
+    position: sticky; /* Keep it visible while scrolling content */
+    top: 20px; /* Spacing from the top of the viewport */
+}
+
+/* Light Mode specific adjustments for readability */
+[data-theme="light"] .sidebar {
+    background-color: #fff; 
+    color: var(--text-color);
+    border: 1px solid #ddd;
+}
+
+
+.sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.sidebar h4 {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: inherit; /* Inherits color from sidebar (var(--nav-text) or var(--text-color)) */
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.sidebar-promo {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid #444; 
+    background-color: #333; /* Darker background for promo in dark mode */
+    border-radius: 4px;
+}
+
+[data-theme="light"] .sidebar-promo {
+    background-color: #f0f0f0; 
+    border-top: 1px solid #ddd;
+}
+
+.sidebar-promo p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* --- MAIN CONTENT LAYOUT ADJUSTMENT --- */
+
+.content-area {
+    flex-grow: 1; /* Allows content area to take up the remaining space */
+}
+
+/* Modify the original .main-content class to work inside .content-area */
+.main-content {
+    /* Keep existing styles like display: flex, gap: 2rem, align-items: center */
+    display: flex; 
+    gap: 2rem; 
+    align-items: center; 
+    /* Remove width/margin/padding that restricts it to 1200px and centers it, as that's handled by .page-layout */
+    max-width: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+/* The children of .main-content need to be adjusted: */
+.home-image,
+.about {
+    width: 50%; /* Keep the 50/50 split within the available content-area */
+    margin: 0;
+}
+
+
+/* --- RESPONSIVENESS ADJUSTMENT (for smaller screens) --- */
+
+@media (max-width: 1000px) {
+    /* At 1000px or less, stack the sidebar and content */
+    .page-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .sidebar {
+        width: 100%; /* Full width when stacked */
+        position: static; /* Remove sticky behavior */
+        order: -1; /* Place sidebar *above* the main content when stacked */
+    }
+
+    /* Adjust main content for stacking */
+    .main-content {
+        flex-direction: column; 
+    }
+
+    .about {
+        width: 100%; /* Full width when stacked */
+        max-width: 500px; /* Optional: limit max size */
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .about-link {
+        margin-top: 1rem;
+    }
+
+    .home-image{
+      width: 100%;
+      height: auto;
+    }
+}
+
+/* Keep the other media queries for navbar and footer from the original CSS */

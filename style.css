@@ -1,0 +1,627 @@
+/* ROOT CSS - ცვლადები თემებისთვის */
+:root {
+    --bg-color: #ffffff; /* ღია ფონი შეიცვალა მუქ ნაცრისფერით */
+    --text-color: #ffffff; 
+    --nav-bg: #222;
+    --nav-text: #fff;
+    --accent-color: #ff6600;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --nav-bg: #000;
+    --nav-text: #ddd;
+    --shadow: rgba(255, 255, 255, 0.1);
+    
+    /* თუ გსურთ გრადიენტი Dark Mode-ში, დაამატეთ: */
+    /* background: linear-gradient(180deg, #121212 0%, #ff7300 100%); */
+}
+
+/* გლობალური სტილები */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* BODY - მხოლოდ თემის ცვლადებით */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh; /* უზრუნველყოფს, რომ ფუტერი ბოლომდე იყოს */
+}
+
+/* NAVBAR სტილები */
+.navbar {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 6px var(--shadow);
+    z-index: 1000;
+    right: 0;
+    left: 0;
+}
+
+.brand-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--nav-text);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 5px;
+    z-index: 2;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.6));
+    display: block;
+}
+
+/* Theme Switch */
+.theme-switch-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+/* ... Theme Switch-ის სხვა სტილები უცვლელია ... */
+.theme-switch {
+    display: inline-block;
+    height: 26px;
+    position: relative;
+    width: 50px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.4s;
+    border: 2px solid #555;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 3px;
+    content: "";
+    height: 16px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 16px;
+}
+
+input:checked+.slider {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(22px);
+    background-color: #222;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Navbar Links */
+.navbar-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: var(--nav-text);
+    padding: 1rem;
+    display: block;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+    color: var(--accent-color);
+}
+
+/* Toggle Button (ჰამბურგერი) */
+.toggle-button {
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    z-index: 3;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--nav-text);
+    border-radius: 10px;
+    transition: background-color 0.3s ease; /* ანიმაციისთვის */
+}
+
+/* **ახალი დამატება:** Toggle Button-ის ფერის შეცვლა, როცა აქტიურია */
+.toggle-button.active .bar {
+    background-color: var(--accent-color); /* ნარინჯისფერი */
+}
+
+/* Media Query (მობილური ვერსია) */
+@media (max-width: 800px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .theme-switch-wrapper {
+        position: absolute;
+        top: 1.2rem;
+        left: auto;
+        right: 4rem;
+        transform: none;
+    }
+
+    .toggle-button {
+        display: flex; /* აჩვენებს ჰამბურგერის ღილაკს */
+    }
+
+    .navbar-links {
+        display: none; /* მალავს ბმულებს თავდაპირველად */
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-links ul li {
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+
+    .navbar-links ul li a {
+        padding: 1rem;
+    }
+
+    /* **Slide დაბრუნდა:** ამატებს display: flex; აქტიურ კლასს */
+    .navbar-links.active {
+        display: flex;
+    }
+}
+
+/* პროდუქტის სტილები */
+.container {
+    max-width: 1200px;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, min-max(200px, 1fr));
+    gap: 2rem;
+    margin-left: 290px;
+}
+
+.brandsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.brandsPhotos {
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+}
+
+.imgs {
+    width: 300px;
+    height: 450px;
+    background-color: var(--nav-bg);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.imgs:hover {
+    box-shadow: 0 10px 30px var(--accent-color);
+    transform: translateY(-10px) !important;
+    transition-duration: 0.3s;
+}
+
+span {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--text-color); /* თემის ფერი */
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.fx-liquid {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.fx-liquid:hover {
+    background-color: #ff0000;
+}
+
+.search-bar {
+    display: block;
+    margin: 20px auto; /* ცენტრირება */
+    border-radius: 20px;
+    background-color: var(--nav-bg);
+    color: var(--accent-color);
+    width: 40%;
+    height: 40px;
+    box-shadow: 4px 5px 10px var(--shadow);
+    border: 1px solid var(--accent-color);
+    font-size: 20px;
+    transition: box-shadow 1s;
+    text-align: center;
+}
+
+/* FOOTER სტილები */
+.footer-section {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 3rem 1rem 1rem 1rem;
+    margin-top: auto;
+    border-top: 4px solid var(--accent-color);
+    padding-left: 255px;
+}
+/* ... Footer-ის სხვა სტილები უცვლელია ... */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.footer-col {
+    flex: 1 1 200px;
+    min-width: 220px;
+}
+
+.footer-brand {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    margin-left: 0;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bbb;
+    max-width: 300px;
+}
+
+[data-theme="light"] .footer-text {
+    color: #555;
+}
+
+.footer-col h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-col ul li a {
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.social-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid #444;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+[data-theme="light"] .footer-bottom {
+    border-top: 1px solid #ddd;
+}
+/* მობილური ადაპტაცია */
+@media (max-width: 768px) {
+    .brandsList {
+        grid-template-columns: auto;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-col {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-brand {
+        margin: 0 auto 1rem auto;
+    }
+
+    .footer-col h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .brandsList {
+        grid-template-columns: auto;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .container {
+        margin-left: 50px;
+        width: 90%;
+    }
+
+    .footer-section {
+        padding-left: 50px;
+    }
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .theme-switch-wrapper {
+        position: absolute;
+        top: 1.2rem;
+        right: 4rem;
+        left: auto;
+        transform: none;
+    }
+
+    .toggle-button {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .navbar-links.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar-links ul li {
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+    
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%; 
+        padding: 0 10px;
+    }
+
+    .search-bar {
+        width: 80%;
+    }
+ 
+    .footer-section {
+        padding-left: 1rem; 
+        padding-right: 1rem;
+        text-align: center;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-col {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-col h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .contact-info li {
+        justify-content: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-title {
+        font-size: 1.2rem;
+    }
+
+    .brandsList {
+        grid-template-columns: 1fr; 
+    }
+
+    .brandsPhotos {
+        width: 100%;
+        height: auto;
+    }
+
+    .imgs {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+        margin: 10px 0;
+    }
+
+    .search-bar {
+        width: 95%;
+        font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+    .brandsList {
+        grid-template-columns: auto;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-col {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-brand {
+        margin: 0 auto 1rem auto;
+    }
+
+    .footer-col h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
